@@ -12,7 +12,7 @@ public class Main {
 		busInterurbano.visualizar();
 		System.out.println("El precio del bus urbano es: " + busUrbano.calcularPrecio());
 		System.out.println("El precio del bus interurbano es : " + busInterurbano.calcularPrecio());
-
+		System.out.println("¡Adiós!");
 	}
 
 }
