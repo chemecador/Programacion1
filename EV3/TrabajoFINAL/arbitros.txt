@@ -1,0 +1,21 @@
+Carlos Bernardes, Brasil, MALA
+Mohamed El Jennati, Marruecos, MALA
+Jake Garner, EEUU, NORMAL
+Roland Herfel, Alemania, BUENA
+Emmanuel Joseph, Francia, MALA
+James Keothavong, Reino Unido, BUENA
+Mohamed Lahyani, Suecia, NORMAL
+Pascal Maria, Francia, BUENA
+Gianluca Moscarella, Italia, BUENA
+Cedric Mourier, Francia, NORMAL
+Fergus Murphy, Irlanda, NORMAL
+Ali Nili, EEUU, MALA
+Kader Nouni, Francia, NORMAL
+Carlos Ramos, Portugal, MALA
+Damian Steiner, Argentina, BUENA
+John blom, Australia, BUENA
+Renaud Lichtenstein, Francia, NORMAL
+Pierre Bacchi, Francia, NORMAL
+Manuel Messina, Italia, BUENA
+Felix Torralba, Espana, BUENA
+Damien Dumusois, Francia, BUENA

@@ -3,20 +3,17 @@ package entidades;
 import java.util.Scanner;
 
 /**
- * Clase Arbitro: La clase Arbitro tiene 2 atributos: el nombre y el país de
- * nacimiento. Por defecto, se han leído los árbitros más reconocidos a nivel
- * mundial a través del fichero arbitros.txt y se ha almacenado en un ArrayList
- * de arbitros al ejecutar el programa. El usuario puede añadir, modificar y
- * ordenar dichos árbitros.
+ * Clase Arbitro: La clase Persona tiene 2 atributos: el nombre y el país de
+ * nacimiento.
  * 
  * @author Alejandro Gata
- *
+ * @since 1.8
  */
 
-public abstract class Persona implements CosasPersona,Comparable<Persona> {
-	
-	static Scanner in = new Scanner (System.in);
-	
+public abstract class Persona implements CosasPersona, Comparable<Persona> {
+
+	static Scanner in = new Scanner(System.in);
+
 	private String nombre;
 	private String pais;
 
@@ -31,8 +28,8 @@ public abstract class Persona implements CosasPersona,Comparable<Persona> {
 	/**
 	 * Sobrecarga de constructor.
 	 * 
-	 * @param nombre : nombre del árbitro.
-	 * @param pais   : país de nacimiento del árbitro.s
+	 * @param nombre : nombre de la persona
+	 * @param pais   : país de nacimiento de la persona
 	 */
 	public Persona(String nombre, String pais) {
 		this.nombre = "";
@@ -56,7 +53,7 @@ public abstract class Persona implements CosasPersona,Comparable<Persona> {
 	}
 
 	/**
-	 * Método que visualiza la información de la persona.
+	 * Método que visualiza la información de la persona
 	 */
 	public void visualizar() {
 		System.out.println("Su nombre es: " + this.nombre);
@@ -64,12 +61,16 @@ public abstract class Persona implements CosasPersona,Comparable<Persona> {
 	}
 
 	/**
-	 * Método que permite modificar la persona.
+	 * Método que permite rellenar una persona
 	 */
 
 	public void rellenar() {
+
 		System.out.println("Introduce el nombre: ");
 		this.nombre = in.nextLine();
+		if (this.nombre.length() == 0) {
+			in.nextLine();
+		}
 		System.out.println("Introduce su país de nacimiento: ");
 		this.pais = in.nextLine();
 	}

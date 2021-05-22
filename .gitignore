@@ -52,6 +52,3 @@ out/
 
 ### VS Code ###
 .vscode/
-
-### Logs ###
-*.txt

@@ -5,16 +5,15 @@ import java.util.InputMismatchException;
 /**
  * Clase Tenista: La clase Tenista tiene 3 atributos: nombre, país y puesto que
  * ocupa en el ranking. Por defecto, se ha leído la información del Top 10 (los
- * 10 mejores tenistas del mundo) a partir del fichero tenista.txt y se ha
- * creado un ArrayList de Tenistas al ejecutar el programa. El usuario puede
- * modificar y buscar los tenistas, así como mostrar el mejor y el peor del
- * ranking.
+ * 10 mejores tenistas del mundo) a partir de la base de datos "tenista" y se ha
+ * creado un ArrayList de Tenistas al ejecutar el programa
  * 
  * @author Alejandro Gata
  * @since 1.8
  */
 
 public class Tenista extends Persona {
+
 	private int puestoRanking;
 
 	/**
@@ -26,11 +25,11 @@ public class Tenista extends Persona {
 	}
 
 	/**
-	 * Sobrecarga de constructor.
+	 * Sobrecarga de constructor
 	 * 
-	 * @param nombre : nombre del tenista.
-	 * @param pais   : país de nacimiento del tenista.
-	 * @param puesto : puesto que ocupa el tenista en el ranking.
+	 * @param nombre : nombre del tenista
+	 * @param pais   : país de nacimiento del tenista
+	 * @param puesto : puesto que ocupa el tenista en el ranking
 	 */
 	public Tenista(String nombre, String pais, int puesto) {
 		super(nombre, pais);
@@ -46,14 +45,16 @@ public class Tenista extends Persona {
 	}
 
 	/**
-	 * Método que visualiza la información del tenista.
+	 * Método que visualiza la información del tenista
 	 */
 	public void visualizar() {
 		super.visualizar();
 		System.out.println("Su posición en el ranking es: " + this.puestoRanking);
 	}
-	
 
+	/**
+	 * Método que rellena un tenista
+	 */
 	public void rellenar() {
 		super.rellenar();
 		System.out.println("¿Cuál es su puesto en el ranking?");
@@ -82,7 +83,7 @@ public class Tenista extends Persona {
 
 	@Override
 	public int compareTo(Persona otraPersona) {
-		
+
 		return super.getNombre().compareTo(otraPersona.getNombre());
 	}
 }

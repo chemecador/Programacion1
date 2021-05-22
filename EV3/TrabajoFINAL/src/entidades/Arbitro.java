@@ -1,13 +1,31 @@
 package entidades;
 
-public class Arbitro extends Persona{
+/**
+ * Clase Arbitro: La clase Arbitro tiene 3 atributos: el nombre, el país de
+ * nacimiento y su reputación. Por defecto, se han leído los árbitros más
+ * reconocidos a nivel mundial a través del fichero arbitros.txt y se ha
+ * almacenado en un ArrayList de arbitros al ejecutar el programa
+ * 
+ * @author Alejandro Gata
+ * @since 1.8
+ */
+
+public class Arbitro extends Persona {
 	private Reputacion rep;
 
+	/**
+	 * Constructor
+	 */
 	public Arbitro() {
 		super();
 		this.rep = null;
 	}
 
+	/**
+	 * Sobrecarga de constructor
+	 * 
+	 * @param rep Reputación
+	 */
 	public Arbitro(Reputacion rep) {
 		super();
 		this.rep = rep;
@@ -21,11 +39,17 @@ public class Arbitro extends Persona{
 		this.rep = rep;
 	}
 
+	/**
+	 * Método que visualiza un árbitro
+	 */
 	public void visualizar() {
 		super.visualizar();
 		System.out.println("Su reputación es " + this.rep);
 	}
 
+	/**
+	 * Método que rellena un árbitro
+	 */
 	public void rellenar() {
 		super.rellenar();
 		System.out.println("Introduzca su reputación (BUENA, NORMAL, MALA)");
@@ -43,7 +67,7 @@ public class Arbitro extends Persona{
 
 	@Override
 	public int compareTo(Persona otraPersona) {
-		
+
 		return super.getNombre().compareTo(otraPersona.getNombre());
 	}
 }

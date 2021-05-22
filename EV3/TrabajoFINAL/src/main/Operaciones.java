@@ -24,24 +24,26 @@ import entidades.Torneo;
 
 public class Operaciones {
 
-	static Scanner in = new Scanner (System.in);
-	
-	public static void anadirTenista(ArrayList<Persona> personas) {
+	static Scanner in = new Scanner(System.in);
+
+	public static void anadirTenista(ArrayList<Persona> personas, BBDD tenistas) {
 		Tenista nuevoTenista = new Tenista();
 		nuevoTenista.rellenar();
 		personas.add(nuevoTenista);
+		tenistas.rellenarTabla("tenista");
 	}
-	
+
 	public static void anadirArbitro(ArrayList<Persona> personas) {
 		Arbitro nuevoArbitro = new Arbitro();
 		nuevoArbitro.rellenar();
 		personas.add(nuevoArbitro);
 	}
+
 	/**
 	 * Método que busca un tenista introducido como parámetro en el ArrayList
 	 * también introducido como parámetro.
 	 * 
-	 * @param tenistas : ArrayList de tenistas donde se buscará el tenista.
+	 * @param personas : ArrayList de tenistas donde se buscará el tenista.
 	 * @param nombre   : nombre del tenista que se buscará en el ArrayList.
 	 */
 	public static void buscar(ArrayList<Persona> personas, String nombre) {
@@ -66,20 +68,20 @@ public class Operaciones {
 	/**
 	 * Método que muestra el tenista con el puesto más alto y más bajo del ranking.
 	 * 
-	 * @param tenistas : ArrayList que almacena los tenistas.
+	 * @param personas : ArrayList que almacena los tenistas.
 	 */
 	public static void mostrarLider(ArrayList<Persona> personas) {
 		Tenista minimo = new Tenista();
 		Tenista maximo = new Tenista();
 		for (Persona persona : personas) {
 			if (persona.getClass().getSimpleName().equalsIgnoreCase("Tenista")) {
-				minimo = (Tenista)persona;
-				maximo = (Tenista)persona;
+				minimo = (Tenista) persona;
+				maximo = (Tenista) persona;
 			}
 		}
 		for (Persona persona : personas) {
 			if (persona.getClass().getSimpleName().equals("Tenista")) {
-				Tenista tenistaComparar = (Tenista)persona;
+				Tenista tenistaComparar = (Tenista) persona;
 				if (tenistaComparar.getPuestoRanking() < minimo.getPuestoRanking()) {
 					minimo = tenistaComparar;
 				}
@@ -97,10 +99,9 @@ public class Operaciones {
 	// TORNEOS
 
 	/**
-	
-	/**
-	 * Método que permite añadir un torneo al ArrayList y que creará posteriormente
-	 * un fichero con los ganadores.
+	 * 
+	 * /** Método que permite añadir un torneo al ArrayList y que creará
+	 * posteriormente un fichero con los ganadores.
 	 * 
 	 * @param torneos : ArrayList de torneos disponibles.
 	 */
@@ -161,7 +162,7 @@ public class Operaciones {
 	 * 
 	 * Método que lee los árbitros que se encuentran en el fichero arbitros.txt
 	 * 
-	 * @param arbitros : ArrayList que contiene los árbitros.
+	 * @param personas : ArrayList que contendrá los árbitros.
 	 */
 	public static void leerArbitros(ArrayList<Persona> personas) {
 		try {
@@ -179,18 +180,10 @@ public class Operaciones {
 				lineaArbitro = f1.readLine();
 			}
 			f1.close();
-			System.out.println("Árbitros leídos correctamente.");
 		} catch (IOException e) {
 			System.out.println("Error al leer arbitros.txt");
 		}
 	}
-
-	/**
-	 * Método que permite añadir un nuevo árbitro al ArrayList, así como crear un
-	 * fichero de text arbitrosModificar.txt donde añadirá el nuevo árbitro.
-	 * 
-	 * @param arbitros : ArrayList de árbitros.
-	 */
 
 	// OTRO
 	/**
@@ -210,5 +203,19 @@ public class Operaciones {
 			System.out.println("Opción incorrecta. Prueba de nuevo");
 			opcion = Character.toUpperCase(in.nextLine().charAt(0));
 		}
+	}
+
+	/**
+	 * Método con todas las operaciones previas
+	 * 
+	 * @param tenistasBBDD Base de datos de tenistas
+	 * @param personas     ArrayList de personas
+	 */
+	public static void operacionesPrevias(BBDD tenistasBBDD, ArrayList<Persona> personas) {
+		leerArbitros(personas);
+		tenistasBBDD.cargarControlador();
+		tenistasBBDD.conectarBBDD();
+		tenistasBBDD.leerTenistas(personas);
+
 	}
 }

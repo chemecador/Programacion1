@@ -2,13 +2,8 @@ package entidades;
 
 
 /**
- * Clase Torneo: Un torneo tiene 4 atributos: nombre, sede, lista de los últimos
- * 5 ganadores y puntos que se lleva el ganador.
- * 
- * Por defecto hay 4 torneos, los 4 Grand Slam (Australian Open, Roland Garros,
- * Wimbledon y US Open), que son leídos a partir de sus respectivos ficheros y
- * se ha creado un ArrayList de Torneos al ejecutar el programa. El usuario
- * puede añadir, modificar y ordenar los torneos que desee.
+ * Clase Torneo: Un torneo tiene 4 atributos: nombre, sede y puntos que se lleva el ganador
+
  * 
  * @author Alejandro Gata
  * @since 1.8
@@ -29,11 +24,11 @@ public class Torneo {
 	}
 
 	/**
-	 * Sobrecarga de constructor de la clase torneo
+	 * Sobrecarga de constructor de la clase Torneo
 	 * 
-	 * @param nombre : nombre del torneo.
-	 * @param sede   : sede del torneo.
-	 * @param puntos : puntos que se lleva el ganador.
+	 * @param nombre : nombre del torneo
+	 * @param sede   : sede del torneo
+	 * @param puntos : puntos que se lleva el ganador
 	 */
 	public Torneo(String nombre, String sede, int puntos) {
 		this.nombre = "";
