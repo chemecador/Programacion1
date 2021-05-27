@@ -14,9 +14,6 @@ public class Menu {
 		System.out.println("5. Eliminar");
 		return in.nextInt();
 	}
-	
-	public static void crearTabla() {
-		
-	}
+
 	
 }

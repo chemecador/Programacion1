@@ -20,7 +20,6 @@ doc/
 *.class
 
 ### Package Files ###
-*.jar
 *.war
 *.nar
 *.ear

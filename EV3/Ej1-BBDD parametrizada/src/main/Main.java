@@ -7,10 +7,13 @@ public class Main {
 		BaseDeDatos miBBDD = new BaseDeDatos();
 		//1. Cargar controlador
 		miBBDD.cargarControlador();
-		
+		System.out.println("cargado");
 		//2. Conectar con la BBDD
 		miBBDD.conectarBBDD();
-		Menu.mostrarMenu();
+		miBBDD.crearTabla();
+		//miBBDD.insertarDato();
+		//miBBDD.borrarDato();
+		miBBDD.ver();
 		//3. Cerrar
 		miBBDD.cerrarConexion();
 	}

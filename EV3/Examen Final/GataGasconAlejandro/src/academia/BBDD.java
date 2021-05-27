@@ -1,4 +1,4 @@
-package main;
+package academia;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,10 +8,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
-public class BaseDeDatos {
-	Connection conexion;
+public class BBDD {
+	private Connection conexion = null;
 	PreparedStatement sentencia;
 	
 	public void cargarControlador() {
@@ -24,7 +25,7 @@ public class BaseDeDatos {
 	public void conectarBBDD() {
 		FileInputStream f = null;
 		try {
-			f = new FileInputStream("conf/datos.properties");
+			f = new FileInputStream ("conf/datos.properties");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -34,14 +35,13 @@ public class BaseDeDatos {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		conexion = null;
 		try {
 			conexion = DriverManager.getConnection("jdbc:mysql://"
-					+ p.getProperty("servidor.nombre")+":"
-					+ p.getProperty("servidor.puerto")+"/"
-					+ p.getProperty("servidor.basedatos"),
-					p.getProperty("servidor.usuario"),
-					p.getProperty("servidor.password"));
+						+ p.getProperty("servidor.nombre") + ":"
+						+ p.getProperty("servidor.puerto") + "/"
+						+ p.getProperty("servidor.bbdd"),
+						p.getProperty("servidor.user"),
+						p.getProperty("servidor.password"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -50,54 +50,70 @@ public class BaseDeDatos {
 	public void cerrarConexion() {
 		try {
 			conexion.close();
+			System.out.println("Conexion cerrada");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
 	public void crearTabla() {
-		String sentenciaSql = "CREATE TABLE IF NOT EXISTS trileria2 (nombreTrilero VARCHAR(10), edadTrilero INT);";
+		String sentenciaSql = "CREATE TABLE IF NOT EXISTS personal "
+				+ "(nombre VARCHAR(30), dni VARCHAR(9), tipo VARCHAR(15))";
 		try {
 			sentencia = conexion.prepareStatement(sentenciaSql);
 			sentencia.executeUpdate();
-			System.out.println("Tabla creada");
 		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	public void insertarDato() {
-		String sentenciaSql = "INSERT INTO trileria2 VALUES (?,?);";;
-		try {
-			String nombreTrilero = "David";
-			int edadTrilero = 21;
 
-			sentencia = conexion.prepareStatement(sentenciaSql);
-			sentencia.setString(1, nombreTrilero);
-			sentencia.setInt(2, edadTrilero);
-			sentencia.executeUpdate();
-			System.out.println("Dato insertado");
-		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	public void ver() {
-		String sentenciaSql = "SELECT * FROM trileria2";
+
+
+	public void insertarDatos(ArrayList<Persona> listadoPersonal) {
+		
+		String sentenciaSql = "INSERT INTO personal VALUES (?,?,?)";
+		String nombre = "";
+		String dni = "";
+		String tipo = "";
+		try {
+			for (Persona persona : listadoPersonal) {
+				nombre = persona.getNombre();
+				dni = persona.getDni();
+				tipo = persona.getClass().getSimpleName();
+				sentencia = conexion.prepareStatement(sentenciaSql);
+				sentencia.setString(1, nombre);
+				sentencia.setString(2, dni);
+				sentencia.setString(3, tipo);
+				sentencia.executeUpdate();
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		
+	}
+	public void visualizarDatos() {
+		String sentenciaSql = "SELECT * FROM personal";
 		try {
 			sentencia = conexion.prepareStatement(sentenciaSql);
 			ResultSet resultado = sentencia.executeQuery();
+			if (!resultado.next()) {
+				System.out.println("No hay datos");
+			}
 			while (resultado.next()) {
-				System.out.println("Nombre del Trilero " + resultado.getString(1));
+				System.out.println("Nombre: " + resultado.getString(1));
+				System.out.println("DNI: " + resultado.getString(2));
+				System.out.println("Tipo: " + resultado.getString(3));
+				System.out.println();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	public void borrarDato() {
-		String sentenciaSql = "DELETE FROM trileria2 WHERE nombreTrilero = ?";
-		String nombreBorrar = "David";
+	public void vaciarBBDD() {
+		String sentenciaSql = "DELETE FROM personal";
 		try {
 			sentencia = conexion.prepareStatement(sentenciaSql);
-			sentencia.setString(1, nombreBorrar);
 			sentencia.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
